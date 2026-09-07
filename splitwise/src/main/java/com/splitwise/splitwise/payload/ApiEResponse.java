@@ -39,4 +39,18 @@ public class ApiEResponse<T> {
     }
 
 
+    public static <T> ApiEResponse<T> error(String messsage){
+        return ApiEResponse.<T>builder()
+                .success(true)
+                .messsage(messsage)
+                .build();
+    }
+
+    public static <T> ApiEResponse<T> error(String messsage, T data){
+        return ApiEResponse.<T>builder()
+                .success(true)
+                .messsage(messsage)
+                .data(data)
+                .build();
+    }
 }
