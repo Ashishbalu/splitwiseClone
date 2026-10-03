@@ -1,4 +1,4 @@
-package com.splitwise.splitwise.dtos;
+package com.splitwise.splitwise.dtos.response;
 
 public record CommonUserResponse(
         String id,

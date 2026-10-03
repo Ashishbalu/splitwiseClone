@@ -30,9 +30,11 @@ public class SplitGroup {
     @ManyToMany
     @JoinTable(
             name = "group_members",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_id"})
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            uniqueConstraints = @UniqueConstraint(
+                    columnNames = {"group_id", "user_id"}
+            )
     )
     @Builder.Default
     private Set<User> users = new HashSet<>();
