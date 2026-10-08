@@ -52,19 +52,19 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @Builder.Default
     private Set<SplitGroup> groups = new HashSet<>();
 
     public void addGroup(SplitGroup splitGroup) {
         this.groups.add(splitGroup);
-        splitGroup.getUsers().add(this);
+        splitGroup.getUser().add(this);
     }
 
     public void removeGroup(SplitGroup splitGroup) {
         if (this.groups.contains(splitGroup)) {
             this.groups.remove(splitGroup);
-            splitGroup.getUsers().remove(this);
+            splitGroup.getUser().remove(this);
         }
     }
 }

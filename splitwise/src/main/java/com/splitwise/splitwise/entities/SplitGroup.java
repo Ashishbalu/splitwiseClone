@@ -37,16 +37,16 @@ public class SplitGroup {
             )
     )
     @Builder.Default
-    private Set<User> users = new HashSet<>();
+    private Set<User> user = new HashSet<>();
 
     public void addUser(User user){
-        this.users.add(user);
+        this.user.add(user);
         user.getGroups().add(this);
     }
 
     public void removeGroup(User user){
-        if (this.users.contains(user)){
-            this.users.remove(user);
+        if (this.user.contains(user)){
+            this.user.remove(user);
             user.getGroups().remove(this);
         }
     }
