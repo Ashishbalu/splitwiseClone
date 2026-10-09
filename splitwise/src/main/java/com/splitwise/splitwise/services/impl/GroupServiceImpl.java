@@ -6,8 +6,10 @@ import com.splitwise.splitwise.entities.SplitGroup;
 import com.splitwise.splitwise.entities.User;
 import com.splitwise.splitwise.exceptions.ResourceAlreadyExist;
 import com.splitwise.splitwise.exceptions.ResourceDoesNotExist;
+import com.splitwise.splitwise.repositories.ExpenseRepo;
 import com.splitwise.splitwise.repositories.GroupRepo;
 import com.splitwise.splitwise.repositories.UserRepo;
+import com.splitwise.splitwise.repositories.projections.GroupSummmaryProjection;
 import com.splitwise.splitwise.services.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class GroupServiceImpl implements GroupService {
 
     private final GroupRepo groupRepo;
     private final UserRepo userRepo;
+    private final ExpenseRepo expenseRepo;
 
     @Override
     @Transactional
@@ -41,9 +44,19 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
+    public List<GroupSummmaryProjection> getGroupSummaryForUser(String userId) {
+        User _ = userRepo.findById(userId)
+                .orElseThrow(()-> new ResourceDoesNotExist(
+                        "user with id: "+ userId + " does not exist or found"
+                ));
+        return expenseRepo.getGroupSummaryForUser(userId);
+    }
+
+    @Override
+    @Transactional
     public List<User> addMembers(String userId, String groupId, AddMembersRequest addMembersRequest) {
         User currentUser = userRepo.findById(userId).orElseThrow(
-                () -> new ResourceDoesNotExist("user with id: " + userId + "does not found")
+                () -> new ResourceDoesNotExist("user with id: " + userId + " does not found")
         );
         SplitGroup splitGroup = groupRepo.findByIdWithMembers(groupId)
                 .orElseThrow(()-> new ResourceDoesNotExist("Group with id: '" + groupId + "', not found "));

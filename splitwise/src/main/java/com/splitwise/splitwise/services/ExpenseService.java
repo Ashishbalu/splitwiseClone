@@ -1,8 +1,9 @@
 package com.splitwise.splitwise.services;
 
-import com.splitwise.splitwise.dtos.response.CreateExpenseResponse;
+import com.splitwise.splitwise.dtos.request.CreateExpenseRequest;
+import com.splitwise.splitwise.entities.Expense;
 
 public interface ExpenseService {
 
-    CreateExpenseResponse createExpense();
+   Expense createExpense(String userId,String groupId, CreateExpenseRequest createExpenseRequest);
 }

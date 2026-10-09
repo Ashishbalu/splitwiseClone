@@ -3,7 +3,7 @@ package com.splitwise.splitwise.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,5 +29,5 @@ public class ExpenseSplit {
     private User user;
 
     @Column(nullable = false)
-    private BigInteger amount;
+    private BigDecimal amount;
 }

@@ -1,5 +1,6 @@
 package com.splitwise.splitwise.entities;
 
+import com.splitwise.splitwise.dtos.response.CreateExpenseResponse;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -30,7 +32,7 @@ public class Expense {
     private String description;
 
     @Column(nullable = false)
-    private BigInteger amount;
+    private BigDecimal amount;
 
     @ManyToOne(optional = false)
     @JoinColumn(
@@ -57,4 +59,5 @@ public class Expense {
     @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private Set<ExpenseSplit> splits = new HashSet<>();
+
 }

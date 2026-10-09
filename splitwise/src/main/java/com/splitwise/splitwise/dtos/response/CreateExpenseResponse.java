@@ -1,6 +1,10 @@
 package com.splitwise.splitwise.dtos.response;
 
-public record CreateExpenseResponse(
+import java.math.BigDecimal;
 
+public record CreateExpenseResponse(
+        String id,
+        String description,
+        BigDecimal amount
 ) {
 }
